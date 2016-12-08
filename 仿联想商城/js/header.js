@@ -1,28 +1,12 @@
 /**
  * Created by Administrator on 2016/10/5.
  */
-        //      张天爱图消失
-        $("#hideIcon").click(function(){
-            $("#imgBox").addClass("hided");
-            $("#hideIcon").addClass("hided");
-        });
-        
-
-        //            搜索区的搜索框内a标签的消失于隐藏
-        var miix5 = document.getElementById("miix5");
-        var miix5Hide = document.getElementById("miix5Hide");
-        miix5.onfocus = function () {
-            miix5Hide.style.display = "none";
-        }
-        miix5.onblur = function () {
-            miix5Hide.style.display = "block";
-        }
-
-//            banner 左侧商品详细分栏
-        var navCul = document.getElementById("navCul");
+var navCul = document.getElementById("navCul");
         var items = navCul.children;
         var len = items.length;
         var navLink = document.getElementById("navLink");
+
+//            banner 左侧商品详细分栏
         for(var i = 0; i<len; i++){
             items[i].index = i;
             items[i].onmouseover = function(){
@@ -66,7 +50,15 @@
             navLink.children[2].style.color = "#fff";
             navLink.children[3].style.display = "none";
         }
-
+//爆款显示
+//    var bk = document.getElementById('bk') ;
+    var bkxs = document.getElementById('bkxs') ;
+    function bk() {
+    bkxs.style.display="block";
+    };
+    function bkxss() {
+         bkxs.style.display ="none"
+     } ;
 //          中部 banner 特效开始
         var shopCar = document.getElementById("shopCar");
         var ArrowL = document.getElementById("ArrowL");
@@ -88,7 +80,7 @@
         var hornScroll = document.getElementById("hornScoll");
         timer6 = setInterval(autoPlay, 30);
         function autoPlay() {
-            num -= 0.5;      // num 代表文字块的高度
+            num -= 0.5;      // num 代表图片透明度
             num <= -480 ? num = 0 : num;
             hornScroll.style.top = num + "px";
 
@@ -100,72 +92,9 @@
             }
         }
 
-/* ************** 广告图片切换效果 *************** */
-// 图片切换显示函数
-function showImage(index) {
-    for (var i = 0; i < wClen; i++) {
-        wCitems[i].style.zIndex = 100 - i;       //为图片排列顺序
-        wCitems[i].style.opacity = '0';          //将图片透明度全部赋值为0
-        circlesItems[i].className = 'active1';   //圆点背景色全部设置 active1
-    }
-    wCitems[index].style.opacity = '1';
-    circlesItems[index].className = 'active2';
-}
-showImage(0);                                   //初始设置下标为0的图片和圆点的样式
-
-var count = 0;                                  //获取计数器
-// 定义自动轮播函数
-function imageMove() {
-    if (count % 6 == 0) {        // 判断count的值如果能被6整除，则将count重新赋值为0；
-        count = 0;
-    }                            // 将count值当做参数传给函数showImage();
-    showImage(count);
-    count++;                     //执行一次 ＋1
-}
-// 设置两秒调用一次函数imageMove()，并且赋值给imageInitailMove
-var imageInitailMove = setInterval('imageMove()', 2000);
-
-//  定义箭头点击函数
-shopCar.onmouseover = function () {
-    ArrowL.style.display = "block";
-    ArrowR.style.display = "block";
-}
-shopCar.onmouseout = function () {
-    ArrowL.style.display = "none";
-    ArrowR.style.display = "none";
-}
-
-ArrowL.onclick = function() {
-    clearInterval(imageInitailMove);
-    if (count == 0) {         // 由于和自动轮换方向相反所以要判断count的值
-        count = 6;            // 当值为0时，重新赋值为6，继续循环
-    }
-    count--;
-    showImage(count);         //调用函数count先自－
-    imageInitailMove = setInterval('imageMove()', 2000);
-}
-// 向右的点击事件
-ArrowR.onclick = function() {
-    clearInterval(imageInitailMove);
-    imageMove();             //由于和自动轮播的方向相同所以直接调用
-// 重新为定时器赋值
-    imageInitailMove = setInterval('imageMove()', 2000);
-}
-// 圆点的点击事件
-for (var i = 0; i <wClen; i++) {
-    circlesItems[i].index = i;
-    circlesItems[i].onmouseover = function() {
-        clearInterval(imageInitailMove);
-        count = this.index;         // 将当前点击的圆点的下标值赋值给count
-        showImage(count);           // 调用图片切换函数
-        imageInitailMove = setInterval('imageMove()', 2000);
-    }
-}
-/******************************************************************************/
-
 //            banner 区的图片自动切换
 /************************************************* 135
- function autoplay(){
+        function autoplay(){
             var b = isActives();
             clearInterval(timer2);
             var a ;
@@ -188,20 +117,90 @@ for (var i = 0; i <wClen; i++) {
                 }
             }, 20);
         }
- function isActives(){                  // 通过判断小圆点的 class:active 确定此时显示的 li 的 index 函数
+        function isActives(){                  // 通过判断小圆点的 class:active 确定此时显示的 li 的 index 函数
             for(var i = 0; i < 6; i++){
                 if(circlesItems[i].className == "actives"){
                     return i;
                 }
             }
         }
- function isClear(){    // 统一清除小圆点的 class
+        function isClear(){    // 统一清除小圆点的 class
             for(var j = 0; j < wClen;j++){
                 circlesItems[j].className = "";
             }
         }
- timer3 = setInterval(autoplay, 1000);
- *********************************************************/
+        timer3 = setInterval(autoplay, 1000);
+*********************************************************/
+
+
+function showImage(index) {
+    for (var i = 0; i < wClen; i++) {
+        wCitems[i].style.zIndex = 100 - i;//为图片排列顺序
+        wCitems[i].style.opacity = '0';//将图片透明度全部赋值为0
+        circlesItems[i].className = 'active1';//圆点背景色全部设置为黑色
+    }
+    wCitems[index].style.opacity = '1';
+    circlesItems[index].className = 'active2';
+}
+showImage(0);//初始设置下标为0的图片和圆点的样式
+
+var count = 0;//获取计数器
+// 定义自动轮播函数
+function imageMove() {
+    // 判断count的值如果能被6整除，则将count重新赋值为0；
+    if (count % 6 == 0) {
+        count = 0;
+    }
+    // 将count值当做参数传给函数showImage();
+    showImage(count);
+    count++;//执行一次 ＋1
+}
+// 设置两秒调用一次函数imageMove()，并且赋值给imageInitailMove
+var imageInitailMove = setInterval('imageMove()', 2000);
+// 向左点击事件
+
+//      左右箭头的隐藏与消失
+shopCar.onmouseover = function () {
+    ArrowL.style.display = "block";
+    ArrowR.style.display = "block";
+}
+shopCar.onmouseout = function () {
+    ArrowL.style.display = "none";
+    ArrowR.style.display = "none";
+}
+
+ArrowL.onclick = function() {
+    // 先清除定时器
+    clearInterval(imageInitailMove);
+    // 由于和自动轮方向相反所以要判断count的值当值为0时，重新赋值为6，继续循环
+    if (count == 0) {
+        count = 6;
+    }
+    count--;
+    showImage(count);//调用函数count先自－
+    imageInitailMove = setInterval('imageMove()', 2000);
+}
+// 向右的点击事件
+ArrowR.onclick = function() {
+    clearInterval(imageInitailMove);
+    imageMove();//由于和自动轮播的方向相同所以直接调用
+// 重新为定时器赋值
+    imageInitailMove = setInterval('imageMove()', 2000);
+}
+// 圆点的点击事件
+for (var i = 0; i <wClen; i++) {
+    circlesItems[i].index = i;
+    circlesItems[i].onmouseover = function() {
+        clearInterval(imageInitailMove);
+        // 将当前点击的圆点的下标值赋值给count
+        count = this.index;
+        // 调用函数
+        showImage(count);
+        imageInitailMove = setInterval('imageMove()', 2000);
+    }
+}
+/******************************************************************************/
+
 
 /************************************************************************ 286
 
@@ -295,7 +294,22 @@ for (var i = 0; i <wClen; i++) {
 ************************************************************************/
 
 
+//            搜索区的搜索框内a标签的消失于隐藏
+        var hideIcon = document.getElementById("hideIcon");
+        var imgBox = document.getElementById("imgBox");
+        hideIcon.onclick = function () {
+            imgBox.style.display = "none";
+        };
 
+//
+        var miix5 = document.getElementById("miix5");
+        var miix5Hide = document.getElementById("miix5Hide");
+        miix5.onfocus = function () {
+            miix5Hide.style.display = "none";
+        }
+        miix5.onblur = function () {
+            miix5Hide.style.display = "block";
+        }
 
 
 
